@@ -60,7 +60,7 @@ Module Module1
             For Each SamChiple As XmlNode In nodeSaml
                 Select Case SamChiple.Name
                     Case "SeaLevelPressure"
-                        lp = SamChiple.InnerText
+                        lp = Hecto(SamChiple.InnerText)
                     Case "Temperature"
                         tp = K2C(SamChiple.InnerText)
                     Case "SampleType"
@@ -102,8 +102,12 @@ Module Module1
         Return tk
     End Function
 
+    Private Function Hecto(val As Integer) As Integer
+        Return Math.Truncate(val / 100)
+    End Function
+
     Private Function K2C(val As Double) As Double
-        Return val - 273.15
+        Return Math.Round(val - 273.15, 2)
     End Function
 
     Private Function ToDegrees(radians As Double) As Double
